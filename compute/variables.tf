@@ -5,7 +5,7 @@ variable "image_name" {
 
 variable "machine_type" {
   type = string
-  default = "e2-medium"
+  default = "e2-standart-2"
 }
 
 

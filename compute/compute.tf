@@ -1,11 +1,15 @@
 resource "google_compute_instance" "vm_instance" {
-  name      = "master-node"
-  machine_type = "var.machine_type"
+  #name          = "master-node"
+  count         = length(var.instance_names)
+  name          = var.instance_names[count.index] 
+  machine_type  = "var.machine_type"
+  zone          = "us-central1-a"
+  tags          = ["http", "https","lb-health-check", var.instance_names[count.index]]
 
   boot_disk {
     initialize_params {
       image = var.image_name
-      size = "20"
+      size = "100"
       type = "pd-balanced"
     }
 }
