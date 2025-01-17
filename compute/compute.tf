@@ -23,7 +23,6 @@ network_interface {
 }
 }
 
-
 resource "google_compute_address" "static_ip" {
   name = "master-node-ip"
   region = "us-central1"
