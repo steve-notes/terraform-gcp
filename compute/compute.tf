@@ -2,7 +2,7 @@ resource "google_compute_instance" "vm_instance" {
   #name          = "master-node"
   count         = length(var.instance_names)
   name          = var.instance_names[count.index] 
-  machine_type  = "var.machine_type"
+  machine_type  = var.machine_type
   zone          = "us-central1-a"
   tags          = ["http", "https","lb-health-check", var.instance_names[count.index]]
 

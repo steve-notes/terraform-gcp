@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-  project     = "static-forest-437203-m9"
+  project     = "united-sandbox-445705-j4"
   region      = "us-central1"
   zone        = "us-central1-a"
 }

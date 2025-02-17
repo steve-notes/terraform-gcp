@@ -1,6 +1,7 @@
 variable "instance_names" {
-  type = string
-  default = ["masternode", "workernode1", "workernode2"]
+  type = list(string) 
+  #default = ["masternode", "workernode1", "workernode2"]
+  default = ["masternode"]
 }
 
 variable "image_name" {
@@ -10,7 +11,7 @@ variable "image_name" {
 
 variable "machine_type" {
   type = string
-  default = "e2-standart-2"
+  default = "e2-standard-2"
 }
 
 
