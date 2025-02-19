@@ -15,6 +15,6 @@ resource "google_compute_firewall" "k8s_firewall" {
   target_tags = var.target_tags
 
   # For Dynamically fetch VM tags
-  #target_tags   = var.google_compute_instance.vm_instance[*].tags
+  #target_tags   = var.google_compute_instance.vm_instance[*].target_tags
 
 }

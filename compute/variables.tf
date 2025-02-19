@@ -1,7 +1,7 @@
 variable "instance_names" {
   type = list(string) 
-  #default = ["masternode", "workernode1", "workernode2"]
-  default = ["masternode"]
+  default = ["masternode", "workernode1", "workernode2"]
+  #default = ["workernode1"]
 }
 
 variable "image_name" {

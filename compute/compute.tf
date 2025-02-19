@@ -9,7 +9,7 @@ resource "google_compute_instance" "vm_instance" {
   boot_disk {
     initialize_params {
       image = var.image_name
-      size = "100"
+      size = "50"
       type = "pd-balanced"
     }
 }
@@ -18,7 +18,11 @@ resource "google_compute_instance" "vm_instance" {
 network_interface {
   network = "default"
   access_config {
-    nat_ip = google_compute_address.static_ip.address
+    # use this for static ip ## issue can't add this for multiple instance
+    #nat_ip = google_compute_address.static_ip.address 
+   
+    # for multiple instance, use this 
+    #nat_ip = google_compute_address.static_ipi[count.index].address 
   }
 }
 }
