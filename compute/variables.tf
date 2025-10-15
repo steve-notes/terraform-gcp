@@ -16,15 +16,19 @@ variable "machine_type" {
   default = "e2-standard-2"
 }
 
-
-variable "default_disk_size" {
-  type = string
-  default = "50"
-}
-
 variable "default_disk_type" {
   type = string
   default = "pd-balanced" # pd-standard, pd-balanced, pd-ssd
+}
+
+variable "disk_type" {
+  type = map(string)
+  default = {}
+}
+
+variable "default_disk_size" {
+  type = number
+  default = 50
 }
 
 variable "disk_size" {
@@ -32,7 +36,3 @@ variable "disk_size" {
   default = {}
 }
 
-variable "disk_type" {
-  type = map(string)
-  default = {}
-}
