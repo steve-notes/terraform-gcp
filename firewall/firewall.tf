@@ -9,6 +9,7 @@ resource "google_compute_firewall" "k8s_firewall" {
     protocol = each.value.protocol
     ports    = each.value.port
   }
+  
 
   source_ranges = var.source_ranges
 
