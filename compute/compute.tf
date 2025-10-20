@@ -1,13 +1,13 @@
 resource "google_compute_instance" "vm_instance" {
   #name          = "master-node"
-  count         = length(var.instance_names)
-  # for_each      = toset(var.instance_names)
-  name          = var.instance_names[count.index] 
-  # name          = each.key
+  # count         = length(var.instance_names)
+  for_each      = toset(var.instance_names)
+  # name          = var.instance_names[count.index] 
+  name          = each.key
   machine_type  = var.machine_type
   zone          = "us-central1-a"
-  tags          = ["http", "https","lb-health-check", "http-server", "https-server", var.instance_names[count.index]]
-  # tags          = ["http", "https","lb-health-check", each.key]
+  # tags          = ["http", "https","lb-health-check", "http-server", "https-server", var.instance_names[count.index]]
+  tags          = ["http", "https","lb-health-check", each.key]
 
 
   # Skip Creating Intances if not in the list
@@ -21,10 +21,10 @@ resource "google_compute_instance" "vm_instance" {
       image = var.image_name
       # size = "50"
       # type = "pd-balanced"
-      size = lookup(var.disk_size, var.instance_names[count.index], var.default_disk_size) 
-      type = lookup(var.disk_type, var.instance_names[count.index], var.default_disk_type) 
-      # size = lookup(var.disk_size, each.key, var.default_disk_size)
-      # type = lookup(var.disk_type, each.key, var.default_disk_type)
+      # size = lookup(var.disk_size, var.instance_names[count.index], var.default_disk_size) 
+      # type = lookup(var.disk_type, var.instance_names[count.index], var.default_disk_type) 
+      size = lookup(var.disk_size, each.key, var.default_disk_size)
+      type = lookup(var.disk_type, each.key, var.default_disk_type)
     }
 }
 
