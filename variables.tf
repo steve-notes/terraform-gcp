@@ -14,9 +14,10 @@ variable "instance_names" {
 #   type = number
 # }
 
-# variable "disk_size" {
-#   type = number
-# }
+variable "disk_size" {
+  type = map(number)
+  default = {}
+}
 
 # variable "default_disk_type"{
 #     type = string

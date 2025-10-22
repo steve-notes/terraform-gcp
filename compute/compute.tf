@@ -7,7 +7,7 @@ resource "google_compute_instance" "vm_instance" {
   machine_type  = var.machine_type
   zone          = "us-central1-a"
   # tags          = ["http", "https","lb-health-check", "http-server", "https-server", var.instance_names[count.index]]
-  tags          = ["http", "https","lb-health-check", each.key]
+  tags          = ["http", "https","lb-health-check", "http-server", "https-server", each.key]
 
 
   # Skip Creating Intances if not in the list
@@ -29,6 +29,8 @@ resource "google_compute_instance" "vm_instance" {
 }
 
 
+## This section is for network interface and static ip
+
 network_interface {
   network = "default"
   access_config {
@@ -36,12 +38,18 @@ network_interface {
     #nat_ip = google_compute_address.static_ip.address 
    
     # for multiple instance, use this 
-    #nat_ip = google_compute_address.static_ipi[count.index].address 
+    #nat_ip = google_compute_address.static_ip[count.index].address 
+    # nat_ip = google_compute_address.static_ip[each.key].address 
+    nat_ip = try(google_compute_address.static_ip[each.key].address, null)
+
   }
 }
 }
 
 resource "google_compute_address" "static_ip" {
-  name = "master-node-ip"
+  for_each = toset(var.instance_names)
+  # name = "master-node-ip"
+  name = "${each.key}-ip"
   region = "us-central1"
 }
+# end section for network interface and static ip
