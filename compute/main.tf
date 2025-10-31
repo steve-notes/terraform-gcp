@@ -33,23 +33,25 @@ resource "google_compute_instance" "vm_instance" {
 
 network_interface {
   network = "default"
-  access_config {
-    # use this for static ip ## issue can't add this for multiple instance
-    #nat_ip = google_compute_address.static_ip.address 
+  access_config {       
+  // Empty block requests an ephemeral IPv4 from GCP
+  #   # if want to use static ip, uncomment this block and the resource block below  
+  #   #nat_ip = google_compute_address.static_ip.address 
    
-    # for multiple instance, use this 
-    #nat_ip = google_compute_address.static_ip[count.index].address 
-    # nat_ip = google_compute_address.static_ip[each.key].address 
-    nat_ip = try(google_compute_address.static_ip[each.key].address, null)
+  #   # for multiple instance, use this 
+  #   #nat_ip = google_compute_address.static_ip[count.index].address 
+  #   # nat_ip = google_compute_address.static_ip[each.key].address 
+    
+  #   nat_ip = try(google_compute_address.static_ip[each.key].address, null)
 
   }
 }
 }
 
-resource "google_compute_address" "static_ip" {
-  for_each = toset(var.instance_names)
-  # name = "master-node-ip"
-  name = "${each.key}-ip"
-  region = "us-central1"
-}
+# resource "google_compute_address" "static_ip" {
+#   for_each = toset(var.instance_names)
+#   # name = "master-node-ip"
+#   name = "${each.key}-ip"
+#   region = "us-central1"
+# }
 # end section for network interface and static ip
