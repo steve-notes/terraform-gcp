@@ -1,5 +1,5 @@
 variable "instance_names" {
-    type = list(string)
+  type = list(string)
 }
 
 # variable "image_name" {
@@ -15,7 +15,7 @@ variable "instance_names" {
 # }
 
 variable "disk_size" {
-  type = map(number)
+  type    = map(number)
   default = {}
 }
 
